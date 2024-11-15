@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="shortcut icon" href="/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/stylesheets/main-profile.css">
+</head>
+
+<body>
+    <div class="menu">
+        <a href="/profile"><img draggable="false" class="logo"
+                src="https://cdn1.iconfinder.com/data/icons/logotypes/32/pinterest-512.png"></a>
+        <a href="/profile" class="home">Home<img class="icon-down" src="https://i.hizliresim.com/g15mqud.png"></a>
+        <a href="#" class="explore">Explore</a>
+        <a href="#" class="create">Create</a>
+        <input id="one" type="text" class="search-bar" placeholder="Search by your pins">
+        <button id="two" class="search-bar"></button>
+        <div class="icon-container">
+            <img tabindex="1" draggable="false" class="icon bell" src="https://i.hizliresim.com/rcvolcu.png">
+
+            <img tabindex="1" draggable="false" class="icon message" src="https://i.hizliresim.com/newumah.png">
+
+            <img tabindex="1" draggable="false" class="icon pp" src="/images/profile-pic.png">
+
+            <img tabindex="1" draggable="false" class="icon btn" src="https://i.hizliresim.com/g15mqud.png">
+
+            <!----FOCUS----->
+            <div tabindex="1" class="focus-bar bell-bar"></div>
+            <!-------------------->
+            <div tabindex="1" class="focus-bar message-bar"></div>
+            <!-------------------->
+            <div tabindex="1" class="focus-bar pp-bar">
+            </div>
+            <!-------------------->
+            <div tabindex="1" class="focus-bar btn-bar">
+                <img src="/images/profile-pic.png">
+                <div class="username">@<%= user.username %>
+                </div>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+    <!--------------------------->
+    <div class="responsive-search-bar">
+        <input type="text">
+        <p class="close">❌</p>
+    </div>
+    <div class="layout">
+        <div class="profile">
+            <div class="profile__picture">
+                <img src="http://i.pravatar.cc/250?img=58" alt="ananddavis">
+            </div>
+
+            <div class="profile__header">
+                <div class="profile__account">
+                    <h4 class="profile__username">
+                        <%= user.username%>
+                    </h4>
+                    <h4 class="profile__username">@<%= user.username%>
+                    </h4>
+                </div>
+
+                <div class="profile__edit">
+                    <a class="profile__button" href="#">Edit Profile</a>
+                </div>
+            </div>
+
+            <div class="profile__stats">
+                <div class="profile__stat">
+                    <div class="profile__icon profile__icon--gold">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="profile__value">4</div>
+                    <div class="profile__key">Following</div>
+                </div>
+
+                <div class="profile__stat">
+                    <div class="profile__icon profile__icon--blue">
+                        <i class="fas fa-signal"></i>
+                    </div>
+                    <div class="profile__value">0</div>
+                    <div class="profile__key">Created</div>
+                </div>
+
+                <div class="profile__stat">
+                    <div class="profile__icon profile__icon--pink">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="profile__value">9</div>
+                    <div class="profile__key">Saved</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- Upload Form -->
+        <form class="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+            <h2>Upload Your Post</h2>
+            <input type="text" name="filecaption" placeholder="Enter a caption" required>
+            <input type="file" name="file" required>
+            <button type="submit">Submit</button>
+        </form>
+
+        <!-- Posts Section -->
+        <div class="cards">
+            <% if (user.posts && user.posts.length> 0) { %>
+                <% user.posts.forEach(function(post) { %>
+                    <div class="card">
+                        <img src="/images/uploads/<%= post.image %>" alt="Post Image">
+                        <p>
+                            <%= post.imageText || "No caption provided." %>
+                        </p>
+                    </div>
+                    <% }) %>
+                        <% } else { %>
+                            <p class="no-posts">No posts available.</p>
+                            <% } %>
+        </div>
+    </div>
+</body>
+
+</html>
